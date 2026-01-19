@@ -34,6 +34,29 @@
             background-color: var(--card-bg);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            margin-left: 5px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
         }
 
         header {
@@ -71,7 +94,7 @@
             height: 8px;
             background-color: var(--primary-color);
             border-radius: 50%;
-            margin-right: 12px;
+            margin-inline-end: 12px;
         }
 
         p,
@@ -82,12 +105,12 @@
 
         ul {
             list-style: none;
-            padding-left: 20px;
+            padding-inline-start: 20px;
         }
 
         li {
             position: relative;
-            padding-left: 25px;
+            padding-inline-start: 25px;
             margin-bottom: 10px;
         }
 
@@ -95,7 +118,7 @@
             content: '✓';
             color: var(--primary-color);
             position: absolute;
-            left: 0;
+            inset-inline-start: 0;
             font-weight: bold;
         }
 
@@ -105,6 +128,11 @@
             border-radius: 12px;
             border-left: 4px solid var(--primary-color);
             margin: 25px 0;
+        }
+
+        [dir="rtl"] .highlight-box {
+            border-left: none;
+            border-right: 4px solid var(--primary-color);
         }
 
         footer {
@@ -135,60 +163,127 @@
             }
         }
     </style>
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('.content').forEach(el => el.style.display = 'none');
+            document.getElementById(lang).style.display = 'block';
+
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+    </script>
 </head>
 
 <body>
 
     <div class="container">
-        <header>
-            <h1>Privacy Policy</h1>
-            <div class="date">Effective Date: January 1, 2026</div>
-        </header>
-
-        <p>Welcome to <strong>Tilawat (Noble Quran)</strong>. This privacy policy outlines our commitment to protecting
-            the privacy of our users, especially children. Our app is designed to be a safe, spiritual tool for users of
-            all ages.</p>
-
-        <div class="highlight-box">
-            <strong>Family Friendly Promise:</strong> This app adheres to the Google Play Families Policy. We do not
-            collect personal data from children.
+        <div class="lang-switch">
+            <button id="btn-en" class="lang-btn active" onclick="setLang('en')">English</button>
+            <button id="btn-ar" class="lang-btn" onclick="setLang('ar')">العربية</button>
         </div>
 
-        <h2>1. Data Collection</h2>
-        <p>We believe in privacy by design. We do <strong>NOT</strong> collect, store, or share any personal
-            information. You are free to use the app without creating an account or providing sensitive details like
-            your name, email, or phone number.</p>
+        <!-- English Content -->
+        <div id="en" class="content">
+            <header>
+                <h1>Privacy Policy</h1>
+                <div class="date">Effective Date: January 1, 2026</div>
+            </header>
 
-        <h2>2. Location Usage</h2>
-        <p>The app requires access to your location solely for religious calculations:</p>
-        <ul>
-            <li><strong>Prayer Times:</strong> To calculate accurate prayer times based on your specific city and
-                coordinates.</li>
-            <li><strong>Qibla Direction:</strong> To show you the correct direction of the Kaaba relative to your
-                current position.</li>
-        </ul>
-        <p>⚠️ <strong>Important:</strong> All location processing happens <strong>locally on your device</strong>. Your
-            coordinates are never sent to our servers.</p>
+            <p>Welcome to <strong>Tilawat (Noble Quran)</strong>. This privacy policy outlines our commitment to
+                protecting the privacy of our users, especially children. Our app is designed to be a safe, spiritual
+                tool for users of all ages.</p>
 
-        <h2>3. Third-Party Services & Ads</h2>
-        <p>To ensure a pure and safe environment:</p>
-        <ul>
-            <li>We do not use tracking analytics (like Google Analytics).</li>
-            <li>We do not display any advertisements.</li>
-            <li>There are no third-party SDKs that track user behavior.</li>
-        </ul>
+            <div class="highlight-box">
+                <strong>Family Friendly Promise:</strong> This app adheres to the Google Play Families Policy. We do not
+                collect personal data from children.
+            </div>
 
-        <h2>4. App Permissions</h2>
-        <p>We request only necessary permissions:</p>
-        <ul>
-            <li><strong>Location:</strong> Required for Prayer Times & Qibla compass.</li>
-            <li><strong>Notifications:</strong> Required to schedule Adhan alerts and reminders.</li>
-        </ul>
-        <p>You maintain full control and can revoke these permissions at any time via your device settings.</p>
+            <h2>1. Data Collection</h2>
+            <p>We believe in privacy by design. We do <strong>NOT</strong> collect, store, or share any personal
+                information. You are free to use the app without creating an account or providing sensitive details like
+                your name, email, or phone number.</p>
 
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions or concerns regarding this policy, please simply reach out:</p>
-        <p>📧 <a href="mailto:Abdulrahman@bayrkdar.dev">Abdulrahman@bayrkdar.dev</a></p>
+            <h2>2. Location Usage</h2>
+            <p>The app requires access to your location solely for religious calculations:</p>
+            <ul>
+                <li><strong>Prayer Times:</strong> To calculate accurate prayer times based on your specific city and
+                    coordinates.</li>
+                <li><strong>Qibla Direction:</strong> To show you the correct direction of the Kaaba relative to your
+                    current position.</li>
+            </ul>
+            <p>⚠️ <strong>Important:</strong> All location processing happens <strong>locally on your device</strong>.
+                Your coordinates are never sent to our servers.</p>
+
+            <h2>3. Third-Party Services & Ads</h2>
+            <p>To ensure a pure and safe environment:</p>
+            <ul>
+                <li>We do not use tracking analytics (like Google Analytics).</li>
+                <li>We do not display any advertisements.</li>
+                <li>There are no third-party SDKs that track user behavior.</li>
+            </ul>
+
+            <h2>4. App Permissions</h2>
+            <p>We request only necessary permissions:</p>
+            <ul>
+                <li><strong>Location:</strong> Required for Prayer Times & Qibla compass.</li>
+                <li><strong>Notifications:</strong> Required to schedule Adhan alerts and reminders.</li>
+            </ul>
+            <p>You maintain full control and can revoke these permissions at any time via your device settings.</p>
+
+            <h2>5. Contact Us</h2>
+            <p>If you have any questions or concerns regarding this policy, please simply reach out:</p>
+            <p>📧 <a href="mailto:Abdulrahman@bayrkdar.dev">Abdulrahman@bayrkdar.dev</a></p>
+        </div>
+
+        <!-- Arabic Content -->
+        <div id="ar" class="content" dir="rtl" style="display: none;">
+            <header>
+                <h1>سياسة الخصوصية</h1>
+                <div class="date">تاريخ السريان: 1 يناير 2026</div>
+            </header>
+
+            <p>مرحبًا بك في <strong>تلاوة (القرآن الكريم)</strong>. تحدد سياسة الخصوصية هذه التزامنا بحماية خصوصية
+                مستخدمينا، وخاصة الأطفال. تم تصميم تطبيقنا ليكون أداة روحية آمنة للمستخدمين من جميع الأعمار.</p>
+
+            <div class="highlight-box">
+                <strong>تعهد العائلة:</strong> يلتزم هذا التطبيق بسياسة Google Play للعائلات. نحن لا نجمع أي بيانات
+                شخصية من الأطفال.
+            </div>
+
+            <h2>1. جمع البيانات</h2>
+            <p>نحن نؤمن بالخصوصية منذ التصميم. نحن <strong>لا</strong> نجمع أو نخزن أو نشارك أي معلومات شخصية. يمكنك
+                استخدام التطبيق بحرية دون إنشاء حساب أو تقديم تفاصيل حساسة مثل اسمك أو بريدك الإلكتروني أو رقم هاتفك.
+            </p>
+
+            <h2>2. استخدام الموقع</h2>
+            <p>يتطلب التطبيق الوصول إلى موقعك فقط للحسابات الدينية:</p>
+            <ul>
+                <li><strong>أوقات الصلاة:</strong> لحساب أوقات الصلاة الدقيقة بناءً على مدينتك وإحداثياتك المحددة.</li>
+                <li><strong>اتجاه القبلة:</strong> لإظهار الاتجاه الصحيح للكعبة المشرفة بالنسبة لموقعك الحالي.</li>
+            </ul>
+            <p>⚠️ <strong>هام:</strong> تتم جميع عمليات معالجة الموقع <strong>محليًا على جهازك</strong>. لا يتم إرسال
+                إحداثياتك أبدًا إلى خوادمنا.</p>
+
+            <h2>3. خدمات الطرف الثالث والإعلانات</h2>
+            <p>لضمان بيئة نقية وآمنة:</p>
+            <ul>
+                <li>لا نستخدم تحليلات التتبع (مثل Google Analytics).</li>
+                <li>لا نعرض أي إعلانات.</li>
+                <li>لا توجد أدوات تطوير برمجيات (SDK) تابعة لجهات خارجية تتعقب سلوك المستخدم.</li>
+            </ul>
+
+            <h2>4. أذونات التطبيق</h2>
+            <p>نطلب فقط الأذونات الضرورية:</p>
+            <ul>
+                <li><strong>الموقع:</strong> مطلوب لأوقات الصلاة وبوصلة القبلة.</li>
+                <li><strong>الإشعارات:</strong> مطلوبة لجدولة تنبيهات الأذان والتذكيرات.</li>
+            </ul>
+            <p>أنت تحتفظ بالسيطرة الكاملة ويمكنك إلغاء هذه الأذونات في أي وقت عبر إعدادات جهازك.</p>
+
+            <h2>5. اتصل بنا</h2>
+            <p>إذا كان لديك أي أسئلة أو استفسارات بخصوص هذه السياسة، يرجى التواصل معنا ببساطة:</p>
+            <p>📧 <a href="mailto:Abdulrahman@bayrkdar.dev">Abdulrahman@bayrkdar.dev</a></p>
+        </div>
 
         <footer>
             <p>&copy; 2026 Tilawat. All rights reserved.</p>
